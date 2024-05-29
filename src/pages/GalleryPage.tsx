@@ -36,20 +36,8 @@ function GalleryPage() {
     setLoadMore((prev) => prev + 7);
   }
 
-  if (loading) return <MiniSpinner />;
-  if (!images) return;
-
-  return (
-    <div className={styles.container}>
-      <div className={styles.selectContainer}>
-        <p>Gallery</p>
-
-        <SelectInput
-          selectedDays={selectedDays}
-          setSelectedDays={setSelectedDays}
-        />
-      </div>
-
+  let content = (
+    <>
       <ul className={styles.list}>
         {images.slice(0, loadMore).map(
           (image) =>
@@ -66,6 +54,23 @@ function GalleryPage() {
           <button onClick={handleLoadMore}>load more</button>
         )}
       </div>
+    </>
+  );
+
+  if (loading) content = <MiniSpinner />;
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.selectContainer}>
+        <p>Gallery</p>
+
+        <SelectInput
+          selectedDays={selectedDays}
+          setSelectedDays={setSelectedDays}
+        />
+      </div>
+
+      {content}
     </div>
   );
 }

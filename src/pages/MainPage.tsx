@@ -1,3 +1,4 @@
+import styles from '../styles/pages/MainPage.module.css';
 import AstronomyCard from '../components/AstronomyCard';
 import { useEffect, useState } from 'react';
 import { getNasaData } from '../data/apiNasa';
@@ -24,16 +25,25 @@ function MainPage() {
     getData();
   }, [datePicker]);
 
-  if (loading) return <MiniSpinner />;
   if (!data) return;
+
+  let content = <AstronomyCard data={data} />;
+
+  if (loading) content = <MiniSpinner />;
 
   return (
     <div>
-      <AstronomyCard
-        data={data}
-        datePicker={datePicker}
-        setDatePicker={setDatePicker}
-      />
+      <div className={styles.datePicker}>
+        <label>Choose Another Date:</label>
+        <input
+          type='date'
+          value={datePicker}
+          onChange={(e) => setDatePicker(e.target.value)}
+          max={datePickerFormat()}
+        />
+      </div>
+
+      {content}
     </div>
   );
 }
