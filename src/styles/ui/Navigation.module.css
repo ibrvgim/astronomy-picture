@@ -1,0 +1,54 @@
+.navigation {
+  padding: 1.5rem 8rem;
+  border-bottom: 1.5px solid var(--color-grey-500);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navigation img {
+  height: 8rem;
+  width: 8rem;
+}
+
+.logo:link,
+.logo:visited,
+.gallery:link,
+.gallery:visited {
+  display: inline-block;
+  font-weight: 500;
+  font-size: 2rem;
+  letter-spacing: 0.07rem;
+  transition: all 0.4s;
+}
+
+.logo:link,
+.logo:visited {
+  color: var(--color-grey-100);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 2.6rem;
+}
+
+.gallery:link,
+.gallery:visited {
+  color: var(--color-grey-400);
+}
+
+.gallery:hover,
+.gallery:active {
+  color: var(--color-blue-500);
+}
+
+/* 41.25em = 660px */
+@media only screen and (max-width: 41.25em) {
+  .navigation {
+    padding: 1.5rem 5rem;
+  }
+
+  .logo p {
+    display: none;
+  }
+}

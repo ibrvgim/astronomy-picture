@@ -1,0 +1,80 @@
+.container {
+  max-width: 180rem;
+  margin: 0 auto;
+}
+
+.selectContainer {
+  padding: 0 6rem;
+  margin-bottom: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.selectContainer p {
+  font-size: 5rem;
+  font-weight: 600;
+  color: var(--color-grey-300);
+  letter-spacing: 0.2rem;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap: 3rem;
+  column-gap: 2rem;
+}
+
+.list img {
+  width: 35rem;
+  height: 35rem;
+  object-fit: cover;
+}
+
+.list li {
+  width: 35rem;
+  height: 35rem;
+}
+
+.container select {
+  width: 15rem;
+  padding: 1rem 1.5rem;
+  background-color: transparent;
+  border: 1px solid var(--color-grey-400);
+  border-radius: 0.5rem;
+}
+
+.loadMore {
+  display: flex;
+  justify-content: center;
+}
+
+.loadMore button {
+  width: 50%;
+  margin-top: 6rem;
+  background-color: transparent;
+  border: 2px solid var(--color-grey-500);
+  color: var(--color-grey-300);
+  border-radius: 0.5rem;
+  padding: 1rem 4rem;
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.loadMore button:hover {
+  border: 2px solid var(--color-blue-700);
+  color: var(--color-blue-700);
+}
+
+/* 41.25em = 660px */
+@media only screen and (max-width: 41.25em) {
+  .selectContainer p {
+    display: none;
+  }
+
+  .selectContainer {
+    justify-content: flex-end;
+  }
+}
