@@ -3,7 +3,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-blue-900);
 }
 
 .loader {
@@ -20,13 +19,13 @@
   position: absolute;
   inset: 0px;
   border-radius: 50%;
-  border: 5px solid #fff;
+  border: 5px solid #333;
   animation: prixClipFix 2s linear infinite;
 }
 .loader::after {
   inset: 8px;
   transform: rotate3d(90, 90, 0, 180deg);
-  border-color: var(--color-blue-300);
+  border-color: var(--color-blue-400);
 }
 
 @keyframes rotate {
