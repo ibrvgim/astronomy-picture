@@ -7,12 +7,14 @@ import { datePickerFormat } from '../utilities/datePickerFormat';
 import { subtractDays } from '../utilities/subtractDate';
 import MiniSpinner from '../components/MiniSpinner';
 import { AstronomyData } from '../types/types';
+import ErrorPage from './ErrorPage';
 
 function GalleryPage() {
   const [images, setImages] = useState<AstronomyData[] | []>([]);
   const [loading, setLoading] = useState(false);
   const [selectedDays, setSelectedDays] = useState('7');
   const [loadMore, setLoadMore] = useState(10);
+  const [error, setError] = useState('');
 
   // useEffect hook for handling data fetching not a good approach,
   // however, since it's a small data it's fine just to do it like this,
@@ -24,10 +26,14 @@ function GalleryPage() {
 
     setLoading(true);
     async function getData() {
-      const data = await getSpecificNasaData(startDate, endDate);
+      try {
+        const data = await getSpecificNasaData(startDate, endDate);
 
-      setImages(data);
-      setLoading(false);
+        setImages(data);
+        setLoading(false);
+      } catch (error) {
+        if (error instanceof Error) setError(error.message);
+      }
     }
     getData();
   }, [selectedDays]);
@@ -57,6 +63,7 @@ function GalleryPage() {
     </>
   );
 
+  if (error) return <ErrorPage error={error} />;
   if (loading) content = <MiniSpinner />;
 
   return (

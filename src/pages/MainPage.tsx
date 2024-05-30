@@ -6,6 +6,7 @@ import { AstronomyData } from '../types/types';
 import { datePickerFormat } from '../utilities/datePickerFormat';
 import MiniSpinner from '../components/MiniSpinner';
 import { subtractDays } from '../utilities/subtractDate';
+import ErrorPage from './ErrorPage';
 
 function MainPage() {
   // to avoid situations when current day may not have data yet,
@@ -15,20 +16,26 @@ function MainPage() {
   );
   const [data, setData] = useState<AstronomyData | null>(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   // useEffect hook for handling data fetching not a good approach,
   // however, since it's a small data it's fine just to do it like this,
   // otherwise I would use TanStack library.
   useEffect(() => {
-    setLoading(true);
     async function getData() {
-      const data = await getNasaData(datePicker);
-      setData(data);
-      setLoading(false);
+      try {
+        setLoading(true);
+        const data = await getNasaData(datePicker);
+        setData(data);
+        setLoading(false);
+      } catch (error) {
+        if (error instanceof Error) setError(error.message);
+      }
     }
     getData();
   }, [datePicker]);
 
+  if (error) return <ErrorPage error={error} />;
   if (!data) return;
 
   let content = <AstronomyCard data={data} />;
