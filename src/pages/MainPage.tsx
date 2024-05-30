@@ -5,16 +5,20 @@ import { getNasaData } from '../data/apiNasa';
 import { AstronomyData } from '../types/types';
 import { datePickerFormat } from '../utilities/datePickerFormat';
 import MiniSpinner from '../components/MiniSpinner';
+import { subtractDays } from '../utilities/subtractDate';
 
 function MainPage() {
-  const [datePicker, setDatePicker] = useState(() => datePickerFormat());
+  // to avoid situations when current day may not have data yet,
+  // I subtract 1 day from current date to guarantee existence of the data.
+  const [datePicker, setDatePicker] = useState(() =>
+    subtractDays(new Date(), 1)
+  );
   const [data, setData] = useState<AstronomyData | null>(null);
   const [loading, setLoading] = useState(false);
 
   // useEffect hook for handling data fetching not a good approach,
   // however, since it's a small data it's fine just to do it like this,
-  // otherwise I would use TanStack library
-
+  // otherwise I would use TanStack library.
   useEffect(() => {
     setLoading(true);
     async function getData() {
