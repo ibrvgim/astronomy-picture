@@ -1,6 +1,6 @@
 import styles from '../styles/pages/ErrorPage.module.css';
 
-function ErrorPage({ error }: { error: string }) {
+function ErrorPage({ error }: { error?: string }) {
   return (
     <div className={styles.container}>
       <p>{error}</p>
