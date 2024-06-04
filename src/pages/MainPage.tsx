@@ -5,15 +5,10 @@ import { getNasaData } from '../data/apiNasa';
 import { AstronomyData } from '../types/types';
 import { datePickerFormat } from '../utilities/datePickerFormat';
 import MiniSpinner from '../components/MiniSpinner';
-import { subtractDays } from '../utilities/subtractDate';
 import ErrorPage from './ErrorPage';
 
 function MainPage() {
-  // to avoid situations when current day may not have data yet,
-  // I subtract 1 day from current date to guarantee existence of the data.
-  const [datePicker, setDatePicker] = useState(() =>
-    subtractDays(new Date(), 1)
-  );
+  const [datePicker, setDatePicker] = useState(() => datePickerFormat());
   const [data, setData] = useState<AstronomyData | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
